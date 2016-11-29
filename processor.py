@@ -101,11 +101,16 @@ def getYearsBack(i, playerSeasons, yearsBack):
 	current = playerSeasons[i]
 	for year in range(yearsBack):
 		if i < yearsBack or i-(year+1) < 0:
-			sample += [current[0] - year - 1, current[1], current[2] - year - 1, current[3], current[4], current[5]]
+			sample += [current[0] - year - 1, current[2] - year - 1]
 			for j in range(6, len(current)):
 				sample += [0]
 		else:
-			sample += playerSeasons[i-(year+1)]
+			temp = playerSeasons[i-(year+1)]
+			del temp[1]
+			del temp[2]
+			del temp[2]
+			del temp[2]
+			sample += temp
 
 	return sample
 
@@ -114,12 +119,16 @@ def generateSamples(yearsBack=1):
 	trainY = {}
 	
 	#Map from labels to 
+	labels = ["G","AB","R","H","2B","3B","HR","RBI","SB","CS","BB","SO","IBB","HBP","SH","SF","GIDP"]
+	for label in labels:
+		trainY[label] = []
 
 	data = getFinalData()
 
 	for key in data:
 		for i, playerSeason in enumerate(data[key][23]):
 			trainX.append(getYearsBack(i, data[key][23], yearsBack))
-			trainY[].append(playerSeason)
+			for j, label in enumerate(labels):
+				trainY[label].append(playerSeason[6+j])
 
 	return (trainX, trainY)
