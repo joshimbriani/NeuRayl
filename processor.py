@@ -111,13 +111,15 @@ def getYearsBack(i, playerSeasons, yearsBack):
 
 def generateSamples(yearsBack=1):
 	trainX = []
-	trainY = []
+	trainY = {}
 	
+	#Map from labels to 
+
 	data = getFinalData()
 
 	for key in data:
 		for i, playerSeason in enumerate(data[key][23]):
 			trainX.append(getYearsBack(i, data[key][23], yearsBack))
-			trainY.append(playerSeason)
+			trainY[].append(playerSeason)
 
 	return (trainX, trainY)
