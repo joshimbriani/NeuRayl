@@ -113,13 +113,13 @@ def getYearsBack(i, playerSeasons, yearsBack):
 
 def generateSamples(yearsBack=1):
 	trainX = []
-	trainY = {}
+	trainY = []
 	
 	#Map from labels to 
 	labelsToNumbers = ["age", "year", "games", "atbats", "runs", "hits", "doubles", "triples", "homeruns", "runsbattedin", "stolenbases", "caughtstealing", "walks", "strikeouts", "intentionalwalks", "hitbypitch", "sacrificehits", "sacrificeflies", "groundintodoubleplay"]
 
-	for label in labelsToNumbers:
-		trainY[label] = []
+	#for label in labelsToNumbers:
+		#trainY[label] = []
 
 	data = getFinalData()
 
@@ -131,7 +131,8 @@ def generateSamples(yearsBack=1):
 			del playerSeason[2] # deletes stint
 			del playerSeason[2] # deletes team
 			del playerSeason[2] # deletes league
-			for j, label in enumerate(labelsToNumbers):
-				trainY[label].append(playerSeason[j])
+			trainY.append(playerSeason)
+			#for j, label in enumerate(labelsToNumbers):
+				#trainY[label].append([playerSeason[j]])
 
 	return (trainX, trainY)
